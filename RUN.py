@@ -36,7 +36,6 @@ def F4(x):
     return np.sum(ff)
 
 def F5(x):
-    D = len(x)
     return 1e6 * x[0]**2 + np.sum(x[1:]**2)
 
 def F6(x):
@@ -50,7 +49,6 @@ def F7(x):
     return np.sum(f)
 
 def F8(x):
-    D = len(x)
     w = [1 + (xi - 1)/4 for xi in x[:-1]]
     f = [(wi - 1)**2 * (1 + 10 * np.sin(np.pi * wi + 1)**2) for wi in w]
     wD = 1 + (x[-1] - 1)/4
@@ -343,7 +341,7 @@ def RndX(nP, i):
 
 
 nP = 50
-Func_name = 'F8'
+Func_name = 'F1'
 MaxIt = 500
 
 
@@ -355,8 +353,11 @@ Best_fitness, BestPositions, Convergence_curve = Run(nP, MaxIt, lb, ub, dim, fob
 
 plt.figure()
 plt.semilogy(Convergence_curve, color='r', linewidth=4)
+#注：原matlab代码中使用semilogy画图时应该将hold on放在semilogy后面，否则无法画出对数坐标图。
 plt.title('Convergence curve')
 plt.xlabel('Iteration')
 plt.ylabel('Best fitness obtained so far')
-plt.grid(True)
+plt.grid(False)
+plt.legend(['RUN'])
+plt.axis('tight')
 plt.show()
